@@ -12,6 +12,14 @@ void AGameModeRocketBase::BeginPlay()
 	
 	//Get the GI
 	GameInstanceRef = Cast<UGameInstanceRocketBase>(GetWorld()->GetGameInstance());
+	FString LevelName = UGameplayStatics::GetCurrentLevelName(GetWorld(),true);
+	UE_LOG(LogTemp, Warning,TEXT("Level Name: %s"), *LevelName);
+	FString LevelNumberString = LevelName.Mid(6);
+	UE_LOG(LogTemp, Warning,TEXT("Level Number: %s"), *LevelNumberString);
+	
+	int32 LevelNumber = FCString::Atoi(*LevelNumberString);
+	
+	GameInstanceRef->CurrentLevel = LevelNumber;
 
 	//Get the pawn, bind its delegates
 	RocketPawnRef = Cast<ARocket>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));

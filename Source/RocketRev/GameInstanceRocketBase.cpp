@@ -30,8 +30,10 @@ void UGameInstanceRocketBase::LoadNextLevel()
 {
 	if (CurrentLevel < MaxLevelCount)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("Leaving Level %d"), CurrentLevel);
 		ChangeLevel(CurrentLevel + 1);
 		CurrentLevel++;
+		UE_LOG(LogTemp, Warning, TEXT("Loading Level %d"), CurrentLevel);
 	}else
 	{
 		RestartGame();

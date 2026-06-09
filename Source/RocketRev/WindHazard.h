@@ -20,19 +20,20 @@ public:
 	// Sets default values for this actor's properties
 	AWindHazard();
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* StaticMesh;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UBoxComponent* BoxComponent;
 	
 	UPROPERTY(VisibleAnywhere)
 	bool IsTrapActive;
 	
 	ARocket* RocketPawnRef;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category="Trap")
 	float TrapPushStrength = 100.0f;
+	UPROPERTY(EditAnywhere, Category="Trap", BlueprintReadOnly)
 	float TrapToggleInterval = 5.0f;
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category="Trap", BlueprintReadOnly)
 	bool PlayerInTrap = false;
 
 protected:
@@ -47,6 +48,12 @@ public:
 	void OnTrapOverlap(AActor* OverlappedActor, AActor* OtherActor);
 	UFUNCTION()
 	void OnTrapEndOverlap(AActor* OverlappedActor, AActor* OtherActor);
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayFrontEndTrapActivatedEvents();
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void StopFrontEndTrapActivatedEvents();
 	
 	void ToggleTrap();
 

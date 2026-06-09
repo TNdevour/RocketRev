@@ -69,12 +69,17 @@ void AWindHazard::ToggleTrap()
 {
 	if (IsTrapActive)
 	{
+		
 		UE_LOG(LogTemp, Warning, TEXT("Trap Active"));
 		IsTrapActive = false;
+		
+		
+		StopFrontEndTrapActivatedEvents();
 	}else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Trap Inactive"));
 		IsTrapActive = true;
+		PlayFrontEndTrapActivatedEvents();
 	}
 }
 
