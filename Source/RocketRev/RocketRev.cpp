@@ -3,5 +3,7 @@
 #include "RocketRev.h"
 #include "Modules/ModuleManager.h"
 
-IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, RocketRev, "RocketRev" );
 DEFINE_LOG_CATEGORY(MyLog);
+
+IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, RocketRev, "RocketRev" );
+
