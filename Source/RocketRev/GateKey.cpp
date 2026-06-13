@@ -5,6 +5,8 @@
 #include "Rocket.h"	
 #include "GateKey.h"
 
+#include "RocketRev.h"
+
 // Sets default values
 AGateKey::AGateKey()
 {
@@ -59,7 +61,7 @@ void AGateKey::StartKeyInteract(AActor* OverlappedActor, AActor* OtherActor)
 		PlayCollectingFrontEndActions();//Check for BP Implementation
 		GetWorldTimerManager().SetTimer(CollectionTimerHandle,this,&AGateKey::UnlockPartnerGateDoor, GateKeyUnlockTime);
 		IsBeingCollected = true;
-		UE_LOG(LogTemp,Warning,TEXT("CollectionTimerStarted"));
+		UE_LOG(MyLog,Warning,TEXT("CollectionTimerStarted"));
 	}
 }
 
@@ -69,7 +71,7 @@ void AGateKey::CancelKeyInteract(AActor* OverlappedActor, AActor* OtherActor)
 		StopCollectingFrontEndActions();//Check for BP Implementation
 		GetWorldTimerManager().ClearTimer(CollectionTimerHandle);
 		IsBeingCollected = false;
-		UE_LOG(LogTemp,Warning,TEXT("CollectionTimerCancelled"));
+		UE_LOG(MyLog,Warning,TEXT("CollectionTimerCancelled"));
 	}
 	
 }

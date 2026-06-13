@@ -16,21 +16,25 @@ class ROCKETREV_API AFlyingHazard : public AHazard
 	AFlyingHazard();
 	
 	public:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category="Hazard")
 	FVector MovementFactor;
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere, Category="Hazard")
+	TArray<FVector> MovementFactorArray;
+	
+	UPROPERTY(VisibleAnywhere, Category="Hazard")
+	TArray<FVector> TargetLocationArray;
+	
+	UPROPERTY(VisibleAnywhere, Category="Hazard")
 	FVector DestinationPoint;
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category="Hazard")
 	FVector StartingPoint;
-	UPROPERTY(VisibleAnywhere)
-	FVector DefaultStartingPoint;
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category="Hazard")
 	FVector TargetLocation;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category="Hazard")
 	float TimeToMove;
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category="Hazard")
 	bool HasReachedDestination = false;
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category="Hazard")
 	float MoveSpeed;
 	
 	bool CanMove = false;

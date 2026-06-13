@@ -22,9 +22,9 @@ public:
 	// Sets default values for this actor's properties
 	AGateKey();
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* StaticMesh;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	USphereComponent* SphereComp;
 	
 	UPROPERTY(BlueprintAssignable)

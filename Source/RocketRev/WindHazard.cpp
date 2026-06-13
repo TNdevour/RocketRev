@@ -1,5 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "WindHazard.h"
+
+#include "RocketRev.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -69,15 +71,12 @@ void AWindHazard::ToggleTrap()
 {
 	if (IsTrapActive)
 	{
-		
-		UE_LOG(LogTemp, Warning, TEXT("Trap Active"));
-		IsTrapActive = false;
-		
-		
+		UE_LOG(MyLog, Warning, TEXT("Wind Trap %s Inactive"), *GetName());
+		IsTrapActive = false;		
 		StopFrontEndTrapActivatedEvents();
 	}else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Trap Inactive"));
+		UE_LOG(MyLog, Warning, TEXT("Wind Trap %s Active"), *GetName());
 		IsTrapActive = true;
 		PlayFrontEndTrapActivatedEvents();
 	}
