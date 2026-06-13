@@ -25,7 +25,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UBoxComponent* BoxComponent;
 	
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category="Trap")
 	bool IsTrapActive;
 	
 	ARocket* RocketPawnRef;
