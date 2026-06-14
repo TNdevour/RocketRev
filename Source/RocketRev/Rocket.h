@@ -19,7 +19,7 @@ class ROCKETREV_API ARocket : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ARocket();
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UStaticMeshComponent* StaticMesh;
 	
 	UPROPERTY(BlueprintAssignable)
@@ -53,5 +53,16 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void PlayCrashFrontEndEvents();
-
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Rocket")
+	bool IsUsingMainThruster = false;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Rocket")
+	bool IsUsingLeftThruster = false;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="Rocket")
+	bool IsUsingRightThruster = false;
+	
+	UFUNCTION(BlueprintCallable, Category="Rocket")
+	void DeactivatePlayVariables();
 };

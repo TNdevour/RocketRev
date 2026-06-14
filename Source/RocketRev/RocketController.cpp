@@ -57,6 +57,9 @@ void ARocketController::SetupInputComponent()
 	{
 		EIC->BindAction(BoostAction,ETriggerEvent::Triggered,this, &ARocketController::BoostInput);
 		EIC->BindAction(TurnAction,ETriggerEvent::Triggered,this, &ARocketController::TurnInput);
+		EIC->BindAction(BoostAction,ETriggerEvent::Completed,this, &ARocketController::BoostRelease);
+		EIC->BindAction(TurnAction,ETriggerEvent::Completed,this, &ARocketController::TurnRelease);
+		
 		UE_LOG(LogTemp, Warning, TEXT("EIC Inputs bound"));
 	}
 }
@@ -70,6 +73,10 @@ void ARocketController::BoostInput(const FInputActionValue& Input)
 		float ForceFactor = RocketPawnRef->ForceFactor;
 		
 		RocketPawnRef->StaticMesh->AddForce(RocketPawnRef->GetActorUpVector()*ForceFactor, NAME_None, true);
+		if (!RocketPawnRef->IsUsingMainThruster)
+		{
+			RocketPawnRef->IsUsingMainThruster = true;
+		}
 	}
 	//UE_LOG(LogTemp, Warning, TEXT("Input Value: %s"), *Input.ToString());
 }
@@ -78,12 +85,29 @@ void ARocketController::TurnInput(const FInputActionValue& Input)
 {
 	float InputValue = Input.Get<float>();
 	//UE_LOG(LogTemp, Warning, TEXT("Input Value: %f"), InputValue);
+	if (RocketPawnRef)
+	{
+		if (InputValue > 0.0f)
+		{
+			if (!RocketPawnRef->IsUsingLeftThruster)
+			{
+				RocketPawnRef->IsUsingLeftThruster = true;
+			}
+		}else if (InputValue < 0.0f)
+		{
+			if (!RocketPawnRef->IsUsingRightThruster)
+			{
+				RocketPawnRef->IsUsingRightThruster = true;
+			}
+		}
+		
+		float TurnFactor = InputValue * RocketPawnRef->TurnFactor * GetWorld()->GetDeltaSeconds();
+		FVector TorqueVector = FVector(0.0f, TurnFactor, 0.0f);
 	
-	float TurnFactor = InputValue * RocketPawnRef->TurnFactor * GetWorld()->GetDeltaSeconds();
-	FVector TorqueVector = FVector(0.0f, TurnFactor, 0.0f);
-	
-	RocketPawnRef->StaticMesh->AddTorqueInRadians(TorqueVector, NAME_None, true);
+		RocketPawnRef->StaticMesh->AddTorqueInRadians(TorqueVector, NAME_None, true);
+	}
 }
+	
 
 void ARocketController::SetPlayerEnabled(bool bEnable)
 {
@@ -107,4 +131,28 @@ void ARocketController::RocketHitResponse(bool HasWon)
 		SetActorTickEnabled(false);
 		SetPlayerEnabled(false);
 	}
+}
+
+void ARocketController::BoostRelease() 
+{
+	if (RocketPawnRef)
+	{
+		RocketPawnRef->IsUsingMainThruster = false;
+	}
+	
+}
+
+void ARocketController::TurnRelease()
+{
+	if (RocketPawnRef)
+	{
+		if (RocketPawnRef->IsUsingLeftThruster)
+		{
+			RocketPawnRef->IsUsingLeftThruster = false;
+		}else if (RocketPawnRef->IsUsingRightThruster)
+		{
+			RocketPawnRef->IsUsingRightThruster = false;
+		}
+	}
+	
 }

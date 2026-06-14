@@ -57,14 +57,22 @@ void ARocket::RocketCollision(AActor* OverlappedActor, AActor* OtherActor)
 	if (OtherActor->IsA(ALandingPlatform::StaticClass()) && IsPlaying)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Rocket won! It got to the %s"), *OtherActor->GetName());
-		IsPlaying = false;
+		DeactivatePlayVariables();
 		PlayVictoryFrontEndEvents();
 		OnPlayerIsHit.Broadcast(true);
 	}else if (OtherActor->IsA(AHazard::StaticClass()) && IsPlaying)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Rocket crashed into %s"), *OtherActor->GetName());
-		IsPlaying = false;
+		DeactivatePlayVariables();
 		PlayCrashFrontEndEvents();
 		OnPlayerIsHit.Broadcast(false);
 	}
+}
+
+void ARocket::DeactivatePlayVariables()
+{
+	IsPlaying = false;
+	IsUsingLeftThruster = false;
+	IsUsingRightThruster = false;
+	IsUsingMainThruster = false;
 }
