@@ -25,14 +25,14 @@ void AFlyingHazard::BeginPlay()
 		if (i == 0)
 		{
 			TargetLocationArray.AddUnique(StartingPoint + MovementFactorArray[i]);
-			Distance = FVector::Dist(StartingPoint, MovementFactorArray[i]);
+			Distance = FMath::Abs( FVector::Dist(StartingPoint, TargetLocationArray[0]));
 		}else
 		{
 			TargetLocationArray.AddUnique(TargetLocationArray[i -1 ]  + MovementFactorArray[i]);
 		}
 	}
 	
-	MoveSpeed = Distance / TimeToMove;
+	MoveSpeed = FMath::Abs(Distance / TimeToMove);
 	
 	if (TargetLocationArray.Num() > 0)
 	{
