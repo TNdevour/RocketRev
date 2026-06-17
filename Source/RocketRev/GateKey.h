@@ -34,11 +34,12 @@ public:
 	//Attached GateDoor to unlock. Remember to set it for each Key manually
 	AGateDoor* GateDoor;
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Gate Key")
 	float GateKeyUnlockTime = 2.0;
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GateKey")
 	bool IsBeingCollected = false;
 	
+	UPROPERTY(BlueprintReadOnly, Category = "GateKey")
 	FTimerHandle CollectionTimerHandle;
 
 protected:
