@@ -2,6 +2,8 @@
 
 
 #include "ShaderProgressLibrary.h"
+
+#include "RocketRev.h"
 #include "ShaderCompiler.h"
 
 static int32 InitialJobCount = 0;
@@ -22,8 +24,9 @@ float UShaderProgressLibrary::GetShaderCompileProgress()
 	if (InitialJobCount == 0)
 	{
 		InitialJobCount = Remaining; // store first time
-		
+		UE_LOG(MyLog, Display, TEXT("InitialJobCount: %d"), InitialJobCount);
 	}
-	return (InitialJobCount > 0) ? 1.0f - (float)Remaining / (float)InitialJobCount : 1.0f; 
+	return (InitialJobCount > 0) ? 1.0f - static_cast<float>(Remaining) / static_cast<float>(InitialJobCount) : 1.0f;
+	
 }
 
