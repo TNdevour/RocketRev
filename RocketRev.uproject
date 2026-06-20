@@ -98,14 +98,6 @@
 			"Enabled": false
 		},
 		{
-			"Name": "ChaosInsights",
-			"Enabled": false
-		},
-		{
-			"Name": "ChaosNiagara",
-			"Enabled": false
-		},
-		{
 			"Name": "ChaosEditor",
 			"Enabled": false
 		},
@@ -126,21 +118,24 @@
 			"Enabled": false
 		},
 		{
-			"Name": "FabLauncher",
-			"Enabled": false,
-			"SupportedTargetPlatforms": [
-				"Win64",
-				"Mac",
-				"Linux"
-			]
-		},
-		{
 			"Name": "MetaHumanSDK",
 			"Enabled": false
 		},
 		{
 			"Name": "ChaosUserDataPT",
 			"Enabled": false
+		},
+		{
+			"Name": "GeometryScripting",
+			"Enabled": true
+		},
+		{
+			"Name": "GeometryCollectionPlugin",
+			"Enabled": true
+		},
+		{
+			"Name": "OptionalMobileFeaturesBPLibrary",
+			"Enabled": true
 		}
 	]
 }
