@@ -14,11 +14,11 @@ class ROCKETREV_API UGameInstanceRocketBase : public UGameInstance
 {
 	GENERATED_BODY()
 public:	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 MaxLevelCount = 3;
 	UPROPERTY(EditAnywhere)
 	int32 StartingLevel = 1;
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 CurrentLevel =1;
 	
 	void ChangeLevel(int32 NewLevel);
