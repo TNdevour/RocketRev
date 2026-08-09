@@ -3,7 +3,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "GameInstanceRocketBase.h"
 #include "Rocket.h"
-
+#include "RocketRev.h"
 
 
 void AGameModeRocketBase::BeginPlay()
@@ -13,9 +13,9 @@ void AGameModeRocketBase::BeginPlay()
 	//Get the GI
 	GameInstanceRef = Cast<UGameInstanceRocketBase>(GetWorld()->GetGameInstance());
 	FString LevelName = UGameplayStatics::GetCurrentLevelName(GetWorld(),true);
-	UE_LOG(LogTemp, Warning,TEXT("Level Name: %s"), *LevelName);
+	UE_LOG(MyLog, Warning,TEXT("Level Name: %s"), *LevelName);
 	FString LevelNumberString = LevelName.Mid(6);
-	UE_LOG(LogTemp, Warning,TEXT("Level Number: %s"), *LevelNumberString);
+	UE_LOG(MyLog, Warning,TEXT("Level Number: %s"), *LevelNumberString);
 	
 	int32 LevelNumber = FCString::Atoi(*LevelNumberString);
 	

@@ -31,8 +31,7 @@ void ARocketController::BeginPlay()
 		UE_LOG(LogTemp, Warning, TEXT("Failed to Get local Player"));
 	}
 	
-	
-	
+	GameInstanceRef = Cast<UGameInstanceRocketBase> (GetWorld()->GetGameInstance());
 	
 }
 
@@ -59,6 +58,8 @@ void ARocketController::SetupInputComponent()
 		EIC->BindAction(TurnAction,ETriggerEvent::Triggered,this, &ARocketController::TurnInput);
 		EIC->BindAction(BoostAction,ETriggerEvent::Completed,this, &ARocketController::BoostRelease);
 		EIC->BindAction(TurnAction,ETriggerEvent::Completed,this, &ARocketController::TurnRelease);
+		EIC->BindAction(PrevlevelDebug,ETriggerEvent::Started,this, &ARocketController::PrevLevelPress);
+		EIC->BindAction(NextlevelDebug,ETriggerEvent::Started,this, &ARocketController::NextLevelPress);
 		
 		UE_LOG(LogTemp, Warning, TEXT("EIC Inputs bound"));
 	}
@@ -122,15 +123,8 @@ void ARocketController::SetPlayerEnabled(bool bEnable)
 
 void ARocketController::RocketHitResponse(bool HasWon)
 {
-	if (HasWon)
-	{
-		SetActorTickEnabled(false);
-		SetPlayerEnabled(false);
-	}else
-	{
-		SetActorTickEnabled(false);
-		SetPlayerEnabled(false);
-	}
+	SetActorTickEnabled(false);
+	SetPlayerEnabled(false);
 }
 
 void ARocketController::BoostRelease() 
@@ -155,4 +149,22 @@ void ARocketController::TurnRelease()
 		}
 	}
 	
+}
+
+void ARocketController::PrevLevelPress()
+{
+	if (!GameInstanceRef)
+	{
+		return;
+	}
+	GameInstanceRef->LoadPrevLevel();
+}
+
+void ARocketController::NextLevelPress()
+{
+	if(!GameInstanceRef)
+		{
+		return;
+	}
+	GameInstanceRef ->LoadNextLevel();
 }

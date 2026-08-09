@@ -30,5 +30,6 @@ public:
 	void RestartGame();
 	UFUNCTION()
 	void LoadNextLevel();
-	
+	UFUNCTION()
+	void LoadPrevLevel();
 };

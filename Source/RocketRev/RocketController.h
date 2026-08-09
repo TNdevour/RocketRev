@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "Rocket.h"
+#include "GameInstanceRocketBase.h"
 
 #include "InputAction.h"
 #include "InputActionValue.h"
@@ -26,6 +27,7 @@ public:
 	ARocketController();
 	
 	ARocket* RocketPawnRef;
+	UGameInstanceRocketBase* GameInstanceRef;
 	
 	// Called to bind functionality to input
 	virtual void SetupInputComponent() override;
@@ -38,6 +40,12 @@ public:
 	
 	UPROPERTY(EditAnywhere)
 	class UInputAction* TurnAction;
+	
+	UPROPERTY(EditAnywhere)
+	class UInputAction* PrevlevelDebug;
+	
+	UPROPERTY(EditAnywhere)
+	class UInputAction* NextlevelDebug;
 	
 	void BoostInput(const FInputActionValue& Input);
 	void TurnInput(const FInputActionValue& Input);
@@ -53,5 +61,7 @@ protected:
 	
 	void BoostRelease();
 	void TurnRelease();
+	void PrevLevelPress();
+	void NextLevelPress();
 	
 };

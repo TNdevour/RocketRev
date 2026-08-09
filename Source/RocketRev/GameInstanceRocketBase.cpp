@@ -40,3 +40,17 @@ void UGameInstanceRocketBase::LoadNextLevel()
 		//Replace This with a credits Level later
 	}
 }
+
+void UGameInstanceRocketBase::LoadPrevLevel()
+{
+	if (CurrentLevel > StartingLevel)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Leaving Level %d"), CurrentLevel);
+		ChangeLevel(CurrentLevel - 1);
+		CurrentLevel--;
+		UE_LOG(LogTemp, Warning, TEXT("Loading Level %d"), CurrentLevel);
+	}else
+	{
+		RestartLevel();
+	}
+}
