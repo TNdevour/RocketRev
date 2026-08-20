@@ -24,7 +24,6 @@ class ROCKETREV_API ARocketController : public APlayerController
 	GENERATED_BODY()
 	
 public:
-	ARocketController();
 	
 	ARocket* RocketPawnRef;
 	UGameInstanceRocketBase* GameInstanceRef;

@@ -3,13 +3,6 @@
 #include "InputMappingContext.h"
 #include "Rocket.h"
 
-
-
-ARocketController::ARocketController()
-{
-	
-}
-
 void ARocketController::BeginPlay()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Rocket Controller BeginPlay"));
