@@ -38,6 +38,7 @@ class ROCKETREV_API AFlyingHazard : public AHazard
 	float MoveSpeed;
 	
 	bool CanMove = false;
+	const float VECTORTOLERANCE = 1.0f;
 	
 	virtual void BeginPlay() override;
 	virtual void Tick( float DeltaTime ) override;

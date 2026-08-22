@@ -52,37 +52,20 @@ void AFlyingHazard::Tick(float DeltaTime)
 	
 	FVector CurrentLocation = GetActorLocation();
 	
-	
-	
-
-	//Checks to Update the target location for back and forth movement
-	/*if(NewLocation.Equals(TargetLocation, 1.0f))
-	{
-		if (TargetLocation.Equals(DestinationPoint, 1.0f))
-		{
-			//UE_LOG(LogTemp, Warning, TEXT("Reached Destination Point, switching target to start"))
-			TargetLocation = StartingPoint;
-		}else if (TargetLocation.Equals(StartingPoint, 1.0f))
-		{
-			//UE_LOG(LogTemp, Warning, TEXT("Reached Starting Point, switching target to Destination"))
-			TargetLocation = DestinationPoint;
-		}
-	}*/
-	
 	if (TargetLocationArray.Num() == 0)
 	{
 		UE_LOG(MyLog, Warning, TEXT("No target location found!"));
 	}else if (TargetLocationArray.Num() == 1)
 	{
 		FVector NewLocation = FMath::VInterpConstantTo(CurrentLocation, TargetLocation, DeltaTime, MoveSpeed);
-		//UE_LOG(MyLog, Warning, TEXT("Theres a single Target Location"));
+		//UE_LOG(MyLog, Warning, TEXT("There's a single Target Location"));
 		if(NewLocation.Equals(TargetLocation, 1.0f))
 		{
-			if (TargetLocation.Equals(DestinationPoint, 1.0f))
+			if (TargetLocation.Equals(DestinationPoint, VECTORTOLERANCE))
 			{
 				//UE_LOG(LogTemp, Warning, TEXT("Reached Destination Point, switching target to start"))
 				TargetLocation = StartingPoint;
-			}else if (TargetLocation.Equals(StartingPoint, 1.0f))
+			}else if (TargetLocation.Equals(StartingPoint, VECTORTOLERANCE))
 			{
 				//UE_LOG(LogTemp, Warning, TEXT("Reached Starting Point, switching target to Destination"))
 				TargetLocation = DestinationPoint;
@@ -90,15 +73,15 @@ void AFlyingHazard::Tick(float DeltaTime)
 		}
 		SetActorLocation(NewLocation);
 	}else if(TargetLocationArray.Num() > 1){//when using multiple target locations, the idea is to iterate through them all
-		//UE_LOG(MyLog, Warning, TEXT("Theres multiple Target Locations"));
+		//UE_LOG(MyLog, Warning, TEXT("There's multiple Target Locations"));
 		
 		FVector NewLocation = FMath::VInterpConstantTo(CurrentLocation, TargetLocation, DeltaTime, MoveSpeed);
 		
-		if (NewLocation.Equals(TargetLocation, 1.0f))
+		if (NewLocation.Equals(TargetLocation, VECTORTOLERANCE))
 		{
 			for (int i = 0; i < TargetLocationArray.Num(); i++)
 			{
-				if (TargetLocation.Equals(TargetLocationArray[i], 1.0f))
+				if (TargetLocation.Equals(TargetLocationArray[i], VECTORTOLERANCE))
 				{
 					if (i == TargetLocationArray.Num() - 1)//Checking for that final index to set it back to the starting point vector
 					{
@@ -112,7 +95,7 @@ void AFlyingHazard::Tick(float DeltaTime)
 						break;
 					}
 				
-				}else if (TargetLocation.Equals(StartingPoint, 1.0f))//This catches the case where the final movement has made it back to the starting point in order to restart the loop
+				}else if (TargetLocation.Equals(StartingPoint, VECTORTOLERANCE))//This catches the case where the final movement has made it back to the starting point in order to restart the loop
 				{
 					TargetLocation = TargetLocationArray[0];	
 				}
